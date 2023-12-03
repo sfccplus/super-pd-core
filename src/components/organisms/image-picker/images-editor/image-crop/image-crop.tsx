@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../manager-hooks';
 
@@ -17,7 +17,7 @@ export default function ImageCrop({ imagePath } : ImageCrop) {
     const [crop, setCrop] = useState({ x: 0, y: 0 });
     const [zoom, setZoom] = useState(1);
 
-    function handleOnCropComplete(croppedArea: Area, croppedAreaPixels: Area) {
+    function handleOnCropComplete(_croppedArea: Area, croppedAreaPixels: Area) {
         dispatch(setTempCropData(croppedAreaPixels));
     }
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import ImageInput from 'src/components/atoms/image-input/image-input';
 import PickList from 'src/components/atoms/pick-list/pick-list';
 import Toggle from 'src/components/atoms/toggle/toggle';

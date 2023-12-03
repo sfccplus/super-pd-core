@@ -1,4 +1,3 @@
-import React from 'react';
 import useResizeObserver from 'use-resize-observer';
 
 import { useAppSelector } from './manager-hooks';

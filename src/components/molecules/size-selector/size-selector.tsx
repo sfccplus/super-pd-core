@@ -1,4 +1,3 @@
-import React from 'react';
 import DimensionSelector from '../dimension-selector/dimension-selector';
 
 const DEFAULT_VALUE = {

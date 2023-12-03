@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { useLazyGetFolderImagesQuery } from '../redux/images-manager-client';
 import ImageHolder from './image-holder/image-holder';

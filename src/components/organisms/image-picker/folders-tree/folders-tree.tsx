@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { NodeApi, Tree, TreeApi } from 'react-arborist';
 import { useDispatch } from 'react-redux';
 

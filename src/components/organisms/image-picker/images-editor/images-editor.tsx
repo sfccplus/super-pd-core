@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAppSelector } from '../manager-hooks';
 
 import ControlPanel from './control-panel';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 const horizontalIcons : any = {
     left: 'fa-align-left',
     center: 'fa-align-center',

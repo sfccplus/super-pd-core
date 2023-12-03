@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { clone } from 'lodash';
 
 import DimensionSelector from '../dimension-selector/dimension-selector';

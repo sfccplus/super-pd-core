@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 
 import FoldersTree from '../folders-tree/folders-tree';
 import { useUploadImageMutation } from '../redux/images-manager-client';

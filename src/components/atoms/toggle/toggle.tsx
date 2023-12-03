@@ -1,4 +1,3 @@
-import React from "react";
 import Switch from "react-switch";
 import styles from "./toggle.module.scss"
 

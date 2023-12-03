@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './border-configurator.module.scss';
 import ColorPicker from '../color-picker/color-picker';
 import DimensionSelector from '../dimension-selector/dimension-selector';
