@@ -1,11 +1,21 @@
 import React, { useMemo, useState } from 'react';
-import { generateSalt } from 'library/utilities';
+import { generateSalt } from 'src/utilities';
 
-export default function BreakPointSelector({ value, onChange, excludeBreakpoints = [] }) {
+interface BreakPointSelectorProps {
+    value: string;
+    onChange: (a: string) => void,
+    excludeBreakpoints: string[]
+}
+
+export default function BreakPointSelector({
+    value,
+    onChange,
+    excludeBreakpoints = [] 
+} : BreakPointSelectorProps) {
     const selectorSalt = useMemo(() => generateSalt(3), []);
     const [currentBreakpoint, setCurrentBreakpoint] = useState(value);
 
-    function handleBreakPointChange(event) {
+    function handleBreakPointChange(event: React.ChangeEvent<HTMLInputElement>) {
         const newBreakPoint = event.target.value;
         setCurrentBreakpoint(newBreakPoint);
         if (onChange) {
@@ -13,7 +23,7 @@ export default function BreakPointSelector({ value, onChange, excludeBreakpoints
         }
     }
 
-    function displayBreakpoint(breakpointName) {
+    function displayBreakpoint(breakpointName: string) {
         const breakpoint = excludeBreakpoints.find((value) => value === breakpointName);
         return breakpoint == null;
     }

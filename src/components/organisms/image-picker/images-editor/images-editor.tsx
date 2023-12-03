@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../manager-hooks';
 
 import ControlPanel from './control-panel';
 import ImageCrop from './image-crop/image-crop';
@@ -8,10 +8,14 @@ import imgManagerHelpers from '../img-manager-helpers';
 
 import styles from './images-editor.module.scss';
 
-export default function ImagesEditor({ currentImagePath }) {
-    const currentEditorPage = useSelector((state) => state.manager.currentEditorPage);
-    const cropData = useSelector((state) => state.image.cropData);
-    const quality = useSelector((state) => state.image.quality);
+interface ImagesEditorProps {
+    currentImagePath: string
+}
+
+export default function ImagesEditor({ currentImagePath } : ImagesEditorProps) {
+    const currentEditorPage = useAppSelector((state) => state.manager.currentEditorPage);
+    const cropData = useAppSelector((state) => state.image.cropData);
+    const quality = useAppSelector((state) => state.image.quality);
 
     const finalURL = imgManagerHelpers.getFinalURL(currentImagePath, cropData, quality);
 
@@ -32,9 +36,7 @@ export default function ImagesEditor({ currentImagePath }) {
                         ></div>
                     )}
                 </div>
-                {currentEditorPage == 'home' && (
-                    <ControlPanel currentTab={currentEditorPage} />
-                )}
+                {currentEditorPage == 'home' && <ControlPanel /> }
             </div>
         </div>
     );

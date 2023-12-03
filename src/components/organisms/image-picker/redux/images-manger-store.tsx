@@ -15,3 +15,6 @@ export const imagesMangerStore = configureStore({
         return concat(getDefaultMiddleware(), imagesManagerClient.middleware);
     },
 });
+
+export type ManagerDispatch = typeof imagesMangerStore.dispatch
+export type ManagerState = ReturnType<typeof imagesMangerStore.getState>

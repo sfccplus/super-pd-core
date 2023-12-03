@@ -16,8 +16,19 @@ const DEFAULT_VALUE = {
     radius: { value: 0, unit: 'px' },
 };
 
-export default function BorderConfigurator({ name, value = DEFAULT_VALUE, onChange }) {
-    function handleChange(property, newValue) {
+interface BorderConfiguratorProps {
+    name: string;
+    value: BorderConfig;
+    onChange: (a: BorderConfig) => void
+}
+
+export default function BorderConfigurator({ 
+    name,
+    value = DEFAULT_VALUE,
+    onChange
+} : BorderConfiguratorProps) {
+
+    function handleChange(property: any, newValue: any) {
         const updatedConfig = {
             ...value,
             [property]: newValue,

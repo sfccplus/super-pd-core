@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import RangeSlider from 'react-range-slider-input';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from '../manager-hooks';
 
 import { setQuality } from '../redux/image-slice';
 
@@ -9,15 +10,17 @@ import 'react-range-slider-input/dist/style.css';
 
 export default function ControlPanel() {
     const dispatch = useDispatch();
-    const quality = useSelector((state) => state.image.quality);
-    const [qualityInputState, setQualityInputState] = useState();
+    const quality = useAppSelector((state) => state.image.quality);
+    const [qualityInputState, setQualityInputState] = useState<number[]>();
 
     useEffect(() => {
         setQualityInputState([0, quality]);
     }, [quality]);
 
     function handleQualityChange() {
-        dispatch(setQuality(qualityInputState[1]));
+        if (qualityInputState && qualityInputState.length) {
+            dispatch(setQuality(qualityInputState[1]));
+        }
     }
 
     return (

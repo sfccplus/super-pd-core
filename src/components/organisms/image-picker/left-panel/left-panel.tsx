@@ -2,17 +2,25 @@ import React, { useRef } from 'react';
 
 import FoldersTree from '../folders-tree/folders-tree';
 import { useUploadImageMutation } from '../redux/images-manager-client';
-import LoadingSpinner from 'library/atoms/loading-spinner/loading-spinner';
+import LoadingSpinner from 'src/components/atoms/loading-spinner/loading-spinner';
 
 import styles from './left-panel.module.scss';
 
-export default function LeftPanel({ height, currentFolder }) {
-    const uploadFormRef = useRef(null);
+interface LeftPanelProps {
+    height: number | undefined;
+    currentFolder: string;
+}
+
+export default function LeftPanel({ height, currentFolder } : LeftPanelProps) {
+    const uploadFormRef = useRef<HTMLFormElement>(null);
     const [updatePost, { isLoading }] = useUploadImageMutation();
 
     function handleFileChange() {
-        const formData = new FormData(uploadFormRef.current);
+        const formElement = uploadFormRef.current;
 
+        if (!formElement) return;
+
+        const formData = new FormData(formElement);
         updatePost({
             folderPath: currentFolder,
             data: formData,

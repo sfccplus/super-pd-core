@@ -8,7 +8,7 @@ export const imagesManagerClient = createApi({
     }),
     tagTypes: ['Images'],
     endpoints: (builder) => ({
-        getLibraryFolders: builder.query({
+        getLibraryFolders: builder.query<any[], void>({
             query: () => `${window.getLibraryFoldersURL}`,
         }),
         getFolderImages: builder.query({

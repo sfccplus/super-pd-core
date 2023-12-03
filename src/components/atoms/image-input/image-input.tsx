@@ -1,8 +1,15 @@
 import React from 'react';
 import styles from './image-input.module.scss';
 
-export default function ImageInput({ name, value, onChange, hideLabel }) {
-    function handleBreakoutClose({ type, value }) {
+interface ImageInputProps {
+    name: string;
+    value: string;
+    onChange: (a: string) => void;
+    hideLabel?: boolean;
+}
+
+export default function ImageInput({ name, value, onChange, hideLabel } : ImageInputProps) {
+    function handleBreakoutClose({ type, value } : any) {
         if (type === 'sfcc:breakoutApply') {
             onChange(value);
         }

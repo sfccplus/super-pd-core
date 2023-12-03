@@ -4,11 +4,12 @@ import imgManagerHelpers from '../img-manager-helpers';
 
 const initialState = {
     path: '',
-    cropData: null,
+    cropData: undefined,
     quality: 100,
+    tempCropData: undefined
 };
 
-function publishState(state) {
+function publishState(state: any) {
     if (window.publishState) {
         const imageURL = imgManagerHelpers.getFinalURL(
             state.path,
@@ -25,7 +26,7 @@ export const imageSlice = createSlice({
     reducers: {
         setCurrentImage: (state, action) => {
             state.path = action.payload;
-            state.cropData = null;
+            state.cropData = undefined;
             publishState(state);
         },
         setTempCropData: (state, action) => {
@@ -33,7 +34,7 @@ export const imageSlice = createSlice({
         },
         saveCropData: (state) => {
             state.cropData = clone(state.tempCropData);
-            state.tempCropData = null;
+            state.tempCropData = undefined;
             publishState(state);
         },
         setQuality: (state, action) => {
@@ -42,7 +43,7 @@ export const imageSlice = createSlice({
         },
         resetImage: (state) => {
             state.quality = 100;
-            state.cropData = null;
+            state.cropData = undefined;
             publishState(state);
         },
     },

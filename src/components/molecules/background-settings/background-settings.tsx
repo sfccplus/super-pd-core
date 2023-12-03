@@ -1,9 +1,14 @@
 import React from 'react';
-import ImageInput from 'library/atoms/image-input/image-input';
-import Picklist from 'library/atoms/picklist/picklist';
-import Toggle from 'library/atoms/toggle/toggle';
+import ImageInput from 'src/components/atoms/image-input/image-input';
+import PickList from 'src/components/atoms/pick-list/pick-list';
+import Toggle from 'src/components/atoms/toggle/toggle';
 
-export default function BackgroundSettings({ value, onChange }) {
+interface BackgroundSettingsProps {
+    value: (a: string, isResponsive?: boolean) => any;
+    onChange: (a: string, b: any) => void;
+}
+
+export default function BackgroundSettings({ value, onChange } : BackgroundSettingsProps) {
     return (
         <>
             <div className="slds-m-bottom_small">
@@ -21,7 +26,7 @@ export default function BackgroundSettings({ value, onChange }) {
                 />
             </div>
             <div className="slds-m-bottom_small">
-                <Picklist
+                <PickList
                     name="Background Size"
                     onChange={(value) => onChange('backgroundSize', value)}
                     value={value('backgroundSize')}

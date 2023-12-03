@@ -1,14 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ChromePicker } from 'react-color';
+import { ChromePicker, ColorResult } from 'react-color';
 import { Portal } from 'react-portal';
 import styles from './color-picker.module.scss';
 
-export default function ColorPicker({pickerPosition, name, value = '', onChange}) {
+interface ColorPickerProps {
+    name: string;
+    pickerPosition: 'top' | 'bottom';
+    value: string;
+    onChange: (a: string) => void
+}
+
+export default function ColorPicker({pickerPosition, name, value = '', onChange} : ColorPickerProps) {
     const [colorPickerActive, setColorPickerActive] = useState(false);
     const [selectedColor, setSelectedColor] = useState(value);
 
-    const buttonRef = useRef(null);
-    const colorPickerRef = useRef(null);
+    const buttonRef = useRef<HTMLButtonElement>(null);
+    const colorPickerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => setSelectedColor(value), [value]);
 
@@ -16,27 +23,30 @@ export default function ColorPicker({pickerPosition, name, value = '', onChange}
         setColorPickerActive(false);
     }
 
-    function handleChange(color) {
+    function handleChange(color: ColorResult) {
         const rgb = color.rgb;
         setSelectedColor(`rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${rgb.a})`)
     }
 
-    function handleChangeComplete(color) {
+    function handleChangeComplete(color: ColorResult) {
         const rgb = color.rgb;
         if (onChange) {
             onChange(`rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${rgb.a})`);
         }
     }
 
-    function toggleColorPicker(event) {
+    function toggleColorPicker(event: React.MouseEvent<HTMLButtonElement>) {
         setColorPickerActive(!colorPickerActive);
         event.stopPropagation();
         return false;
     }
 
     function getPickerPosition() {
-        const clientRec = buttonRef.current.getBoundingClientRect();
+        const buttonElement = buttonRef.current;
 
+        if(!buttonElement) return;
+
+        const clientRec = buttonElement.getBoundingClientRect();
         if (pickerPosition == 'bottom') {
             return {
                 top: clientRec.bottom + 5,

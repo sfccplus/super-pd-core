@@ -1,13 +1,25 @@
 import React, { useState } from 'react';
 
-export default function NumberInput({ name, value, onChange, hideLabel }) {
+interface NumberInputProps {
+    name: string;
+    value: number;
+    onChange: (a: number, b: boolean) => void;
+    hideLabel?: boolean;
+}
+
+export default function NumberInput({ 
+    name,
+    value,
+    onChange,
+    hideLabel
+} : NumberInputProps) {
     const [isInputValid, setIsInputValid] = useState(true);
 
-    function handleChange(event) {
+    function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         const target = event.target;
         setIsInputValid(target.validity.valid);
 
-        onChange(target.value, target.validity.valid);
+        onChange(+target.value, target.validity.valid);
     }
 
     return (

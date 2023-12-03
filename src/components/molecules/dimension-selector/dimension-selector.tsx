@@ -1,15 +1,24 @@
 import React from 'react';
 import styles from './dimension-selector.module.scss';
 
+interface DimensionSelectorProps {
+    name: string;
+    measurement: Measurement;
+    onChange: (a: Measurement) => void;
+    className?: string;
+    inputOnly?: boolean;
+    readOnly?: boolean;
+}
+
 export default function DimensionSelector({
-    name,
-    measurement = { value: '', unit: 'px' },
-    onChange,
-    className,
-    inputOnly = false,
-    readOnly = false
-}) {
-    function handleUnitChange(event) {
+        name,
+        measurement = { value: '', unit: 'px' },
+        className,
+        inputOnly = false,
+        readOnly = false,
+        onChange,
+}: DimensionSelectorProps) {
+    function handleUnitChange(event: React.ChangeEvent<HTMLSelectElement>) {
         measurement.unit = event.target.value;
 
         if (onChange) {
@@ -17,7 +26,7 @@ export default function DimensionSelector({
         }
     }
 
-    function handleValueChange(event) {
+    function handleValueChange(event: React.ChangeEvent<HTMLInputElement>) {
         measurement.value = event.target.value;
 
         if (onChange) {
@@ -51,7 +60,6 @@ export default function DimensionSelector({
                     <option value="%">%</option>
                     <option value="vh">vh</option>
                     <option value="vw">vw</option>
-                    {/* <option value="auto">auto</option> */}
                 </select>
             </div>
         </div>

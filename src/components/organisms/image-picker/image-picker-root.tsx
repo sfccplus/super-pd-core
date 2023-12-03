@@ -7,16 +7,19 @@ import { imagesMangerStore } from './redux/images-manger-store';
 import styles from './image-picker.module.scss';
 
 export default function ImagePickerRoot() {
-    const [windowHeight, setWindowHeight] = useState(window.top.innerHeight);
-    function handleWindowResize(event) {
-        setWindowHeight(event.target.innerHeight);
+    const topWindow = window.top || window;
+    const [windowHeight, setWindowHeight] = useState(topWindow.innerHeight);
+
+    function handleWindowResize(event: Event) {
+        const target = event.target as Window;
+        setWindowHeight(target.innerHeight);
     }
 
     useEffect(() => {
-        window.top.addEventListener('resize', handleWindowResize);
+        topWindow.addEventListener('resize', handleWindowResize);
 
         return () => {
-            window.top.removeEventListener('resize', handleWindowResize);
+            topWindow.removeEventListener('resize', handleWindowResize);
         };
     }, []);
 

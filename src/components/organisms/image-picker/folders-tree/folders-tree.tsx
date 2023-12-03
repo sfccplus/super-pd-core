@@ -1,21 +1,27 @@
 import React, { useEffect, useRef } from 'react';
-import { Tree } from 'react-arborist';
+import { NodeApi, Tree, TreeApi } from 'react-arborist';
 import { useDispatch } from 'react-redux';
 
-import LoadingSpinner from 'library/atoms/loading-spinner/loading-spinner';
+import LoadingSpinner from 'src/components/atoms/loading-spinner/loading-spinner';
 
 import { useGetLibraryFoldersQuery } from '../redux/images-manager-client';
 import { setCurrentFolder } from '../redux/manager-slice';
 import FolderNode from './folder-node';
 
-export default function FoldersTree({ currentFolder, height }) {
+interface FoldersTreeProps {
+    height: number | undefined;
+    currentFolder: string;
+}
+
+export default function FoldersTree({ height, currentFolder } : FoldersTreeProps) {
     const dispatch = useDispatch();
     const { data, isLoading } = useGetLibraryFoldersQuery();
-    const treeRef = useRef(null);
+    const treeRef = useRef<TreeApi<any>>(null);
 
     useEffect(() => {
-        if (currentFolder && data) {
-            treeRef.current.open(currentFolder);
+        const tree = treeRef.current;
+        if (tree && data && currentFolder) {
+            tree.open(currentFolder);
         }
     }, [treeRef.current, data]);
 
@@ -23,7 +29,7 @@ export default function FoldersTree({ currentFolder, height }) {
         return <LoadingSpinner />;
     }
 
-    function handleFolderActivation(folder) {
+    function handleFolderActivation(folder : NodeApi) {
         dispatch(setCurrentFolder(folder.id));
     }
 

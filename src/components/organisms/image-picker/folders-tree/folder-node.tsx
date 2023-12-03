@@ -1,8 +1,9 @@
 import React from 'react';
 
 import styles from './folders.module.scss';
+import { NodeRendererProps } from 'react-arborist';
 
-export default function FolderNode({ node, style, dragHandle }) {
+export default function FolderNode({ node, style, dragHandle } : NodeRendererProps<any>) {
     function handleChevronClick() {
         node.toggle();
     }

@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Cropper from 'react-easy-crop';
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from '../../manager-hooks';
 
+import Cropper, { Area } from 'react-easy-crop';
 import { setTempCropData } from '../../redux/image-slice';
 
-export default function ImageCrop({ imagePath }) {
+interface ImageCrop {
+    imagePath: string;
+}
+
+export default function ImageCrop({ imagePath } : ImageCrop) {
     const dispatch = useDispatch();
-    const cropData = useSelector((state) => state.image.cropData);
-    const tempCropData = useSelector((state) => state.image.tempCropData);
+    const cropData = useAppSelector((state) => state.image.cropData);
+    const tempCropData = useAppSelector((state) => state.image.tempCropData);
 
     const [crop, setCrop] = useState({ x: 0, y: 0 });
     const [zoom, setZoom] = useState(1);
 
-    function handleOnCropComplete(croppedArea, croppedAreaPixels) {
+    function handleOnCropComplete(croppedArea: Area, croppedAreaPixels: Area) {
         dispatch(setTempCropData(croppedAreaPixels));
     }
 

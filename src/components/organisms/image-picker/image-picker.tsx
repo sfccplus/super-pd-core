@@ -1,17 +1,18 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import useResizeObserver from 'use-resize-observer';
 
-import styles from './image-picker.module.scss';
+import { useAppSelector } from './manager-hooks';
 import ImagesList from './images-list/images-list';
 import ImagesEditor from './images-editor/images-editor';
 import LeftPanel from './left-panel/left-panel';
 
+import styles from './image-picker.module.scss';
+
 export default function ImagePicker() {
     const { ref, height } = useResizeObserver();
-    const isEditorActive = useSelector((state) => state.manager.isEditorActive);
-    const currentFolder = useSelector((state) => state.manager.currentFolder);
-    const currentImagePath = useSelector((state) => state.image.path);
+    const isEditorActive = useAppSelector((state) => state.manager.isEditorActive);
+    const currentFolder = useAppSelector((state) => state.manager.currentFolder);
+    const currentImagePath = useAppSelector((state) => state.image.path);
 
     return (
         <>

@@ -1,14 +1,19 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from '../../manager-hooks';
 
 import { toggleEditor } from '../../redux/manager-slice';
 import { setCurrentImage } from '../../redux/image-slice';
 
 import styles from './image-holder.module.scss';
 
-export default function ImageHolder({ image }) {
+interface ImageHolderProps {
+    image: ImageObject
+}
+
+export default function ImageHolder({ image } : ImageHolderProps ) {
     const { url, name, path } = image;
-    const currentImagePath = useSelector((state) => state.image.path);
+    const currentImagePath = useAppSelector((state) => state.image.path);
 
     const dispatch = useDispatch();
 

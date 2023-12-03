@@ -2,7 +2,13 @@ import React from "react";
 import Switch from "react-switch";
 import styles from "./toggle.module.scss"
 
-export default function Toggle({ name, checked, onChange }) {
+interface ToggleProps {
+    name: string;
+    checked: boolean;
+    onChange: (a: boolean) => void
+}
+
+export default function Toggle({ name, checked, onChange } : ToggleProps) {
     return (
         <div className={styles.switchContainer}>
             <label className="slds-form-element__label">{name}</label>

@@ -1,6 +1,23 @@
 import React from 'react';
 
-export default function Picklist({ name, value, onChange, options = [] }) {
+interface PickListOption {
+    label: string;
+    value: string;
+}
+
+interface PickListProps {
+    name: string;
+    value: string;
+    onChange: (a: string) => void;
+    options: PickListOption[]
+}
+
+export default function PickList({ 
+    name,
+    value,
+    onChange,
+    options = []
+} : PickListProps) {
     const optionsElements = options.map((option) => {
         return (
             <option key={option.value} value={option.value}>
@@ -9,7 +26,7 @@ export default function Picklist({ name, value, onChange, options = [] }) {
         );
     });
 
-    function handleValueChange(event) {
+    function handleValueChange(event: React.ChangeEvent<HTMLSelectElement>) {
         onChange(event.target.value);
     }
 

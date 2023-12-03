@@ -1,5 +1,5 @@
 const imgManagerHelpers = {
-    getFinalURL: function (imagePath, cropData, quality) {
+    getFinalURL: function (imagePath: string, cropData: CropData | undefined, quality: number) {
         let baseURL = window.viewImageURL + imagePath;
 
         if (cropData) {

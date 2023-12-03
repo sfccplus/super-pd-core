@@ -15,7 +15,7 @@ function getDefaultMeasurements() {
     };
 }
 
-function isMeasurementsEqual(measurements) {
+function isMeasurementsEqual(measurements: FourDimensionMeasurement) {
     let result = true;
     let i = 1;
 
@@ -29,11 +29,17 @@ function isMeasurementsEqual(measurements) {
     return result;
 }
 
+interface FourDimensionSelectorProps {
+    name: string;
+    value: FourDimensionMeasurement
+    onChange: (a: FourDimensionMeasurement) => void,
+}
+
 export default function FourDimensionSelector({
     name,
     onChange,
-    value = getDefaultMeasurements()
-}) {
+    value = getDefaultMeasurements(),
+} : FourDimensionSelectorProps) {
     const [fourDimensionMode, setFourDimensionMode] = useState(
         !isMeasurementsEqual(value)
     );
@@ -42,9 +48,10 @@ export default function FourDimensionSelector({
         setFourDimensionMode(!fourDimensionMode);
     }
 
-    function handleValueChange(direction, measurement) {
+    function handleValueChange(direction: Directions, measurement: Measurement) {
         if (!fourDimensionMode) {
-            ['top', 'right', 'bottom', 'left'].forEach(
+            const directions : Directions[] = ['top', 'right', 'bottom', 'left'];
+            directions.forEach(
                 (direction) => (value[direction] = clone(measurement)),
             );
         } else {

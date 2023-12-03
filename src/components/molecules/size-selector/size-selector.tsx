@@ -6,8 +6,13 @@ const DEFAULT_VALUE = {
     width: { value: 200, unit: 'px' },
 };
 
-export default function SizeSelector({ value = DEFAULT_VALUE, onChange }) {
-    function handleChange(property, newValue) {
+interface SizeSelectorProps {
+    value: Size,
+    onChange: (a: Size) => void
+}
+
+export default function SizeSelector({ value = DEFAULT_VALUE, onChange } : SizeSelectorProps) {
+    function handleChange(property: string, newValue: Measurement) {
         const updatedValue = {
             ...value,
             [property]: newValue,

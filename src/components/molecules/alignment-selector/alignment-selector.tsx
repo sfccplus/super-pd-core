@@ -1,24 +1,36 @@
 import React from 'react';
 
-const horizontalIcons = {
+const horizontalIcons : any = {
     left: 'fa-align-left',
     center: 'fa-align-center',
     right: 'fa-align-right',
 };
 
-const verticalIcons = {
+const verticalIcons : any = {
     start: 'fa-chevron-up',
     center: 'fa-minus',
     end: 'fa-chevron-down',
 };
 
-export default function AlignmentSelector({name, value, direction, onChange}) {
+interface AlignmentSelectorProps {
+    name: string;
+    value: string;
+    direction: 'vertical' | 'horizontal';
+    onChange: (a: string) => void;
+}
 
-    function handleSelection(alignment) {
+export default function AlignmentSelector({
+    name,
+    value,
+    direction,
+    onChange
+} : AlignmentSelectorProps) {
+
+    function handleSelection(alignment : string) {
         onChange(alignment === value ? '' : alignment);
     }
 
-    function getSelectionClass(placement) {
+    function getSelectionClass(placement : string) {
         return value === placement ? 'slds-button_brand' : 'slds-button_neutral';
     }
 
