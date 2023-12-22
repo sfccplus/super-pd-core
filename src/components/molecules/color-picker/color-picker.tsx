@@ -1,31 +1,35 @@
-import React, { useEffect, useRef, useState } from "react";
-import { ChromePicker, ColorResult } from 'react-color';
+import React, { ReactElement, useEffect, useRef, useState } from "react";
+import { ColorResult } from '@myassir/react-color';
 import { Portal } from 'react-portal';
+
+import { getClosestAncestor } from "src/utilities";
+import ColorPickerPopup from "./color-picker-popup";
+
 import styles from './color-picker.module.scss';
 
-interface ColorPickerProps {
-    name: string;
-    pickerPosition: 'top' | 'bottom';
-    value: string;
+export interface ColorPickerProps {
+    value?: string;
+    name?: string;
+    hideLabel?: boolean;
     onChange: (a: string) => void
 }
 
-export default function ColorPicker({pickerPosition, name, value = '', onChange} : ColorPickerProps) {
+export default function ColorPicker({
+    name,
+    value = '',
+    hideLabel,
+    onChange
+} : ColorPickerProps) : ReactElement<ColorPickerProps> {
     const [colorPickerActive, setColorPickerActive] = useState(false);
     const [selectedColor, setSelectedColor] = useState(value);
-
+    const iframeId = window.parentIFrame.getId();
     const buttonRef = useRef<HTMLButtonElement>(null);
-    const colorPickerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => setSelectedColor(value), [value]);
 
-    function handleOutsideClick() {
-        setColorPickerActive(false);
-    }
-
     function handleChange(color: ColorResult) {
-        const rgb = color.rgb;
-        setSelectedColor(`rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${rgb.a})`)
+        const rgba = color.rgb;
+        setSelectedColor(`rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`)
     }
 
     function handleChangeComplete(color: ColorResult) {
@@ -41,28 +45,13 @@ export default function ColorPicker({pickerPosition, name, value = '', onChange}
         return false;
     }
 
-    function getPickerPosition() {
-        const buttonElement = buttonRef.current;
+    if(!iframeId) return <></>;
 
-        if(!buttonElement) return;
-
-        const clientRec = buttonElement.getBoundingClientRect();
-        if (pickerPosition == 'bottom') {
-            return {
-                top: clientRec.bottom + 5,
-                right: window.innerWidth - clientRec.right + 2,
-            };
-        }
-
-        return {
-            bottom: window.innerHeight - clientRec.bottom + 40,
-            right: window.innerWidth - clientRec.right + 2,
-        };
-    }
-
+    const iframeElement = window.top?.document.querySelector(`#${iframeId}`) as HTMLElement;
+    const editorsContainer = getClosestAncestor(iframeElement, 'form') as HTMLElement;
     return (
         <div className={`${styles.colorPickerContainer} slds-form-element`}>
-            <label className="slds-form-element__label">{name}</label>
+            {!hideLabel && <label className="slds-form-element__label">{name}</label>}
             <div className="slds-form-element__control slds-grid">
                 <input
                     type="text"
@@ -81,34 +70,19 @@ export default function ColorPicker({pickerPosition, name, value = '', onChange}
                 </div>
             </div>
 
-            <Portal>
-                {colorPickerActive && (
-                    <>
-                        <div
-                            onMouseDown={handleOutsideClick}
-                            style={{
-                                position: 'fixed',
-                                height: '100%',
-                                width: '100%',
-                                backgroundColor: 'transparent',
-                                top: 0,
-                                left: 0,
-                            }}
-                        ></div>
-                        <div
-                            ref={colorPickerRef}
-                            className={`${styles.colorPicker}`}
-                            style={{ ...getPickerPosition() }}
-                        >
-                            <ChromePicker
-                                color={selectedColor}
-                                onChangeComplete={handleChangeComplete}
-                                onChange={handleChange}
-                            />
-                        </div>
-                    </>
-                )}
-            </Portal>
+            {colorPickerActive && (
+                <Portal node={editorsContainer}>
+                    <ColorPickerPopup
+                        buttonRef={buttonRef}
+                        editorsContainer={editorsContainer}
+                        iframeElement={iframeElement}
+                        selectedColor={selectedColor}
+                        onChange={handleChange}
+                        onChangeComplete={handleChangeComplete}
+                        onColorPickerDisplayChange={setColorPickerActive}
+                    />
+                </Portal>
+            )}
         </div>
     )    
 }

@@ -9,4 +9,4 @@ declare global {
     var getLibraryFoldersURL: string;
 }
 
-export * from './components';
+export * from './editors';
