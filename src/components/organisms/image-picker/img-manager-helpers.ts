@@ -2,7 +2,7 @@ import { editorsContext } from 'src/helpers';
 
 const imgManagerHelpers = {
     getFinalURL: function (imagePath: string, cropData: CropData | undefined, quality: number) {
-        let baseURL = editorsContext.urls.viewImageURL + imagePath;
+        let baseURL = editorsContext().urls.viewImageURL + imagePath;
 
         if (cropData) {
             baseURL += '&cropX=' + cropData.x.toFixed(3);

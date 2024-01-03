@@ -1,16 +1,32 @@
+import { useEffect, useState } from 'react';
+
+import { EditorPayload } from 'src/editors/editor-container';
+
 import styles from './image-input.module.scss';
 
 interface ImageInputProps {
     name: string;
     value: string;
-    onChange: (a: string) => void;
+    onChange: (payload: EditorPayload) => void;
     hideLabel?: boolean;
 }
 
 export default function ImageInput({ name, value, onChange, hideLabel } : ImageInputProps) {
+    const [ imgValue, setImgValue ] = useState(value);
+
+    useEffect(() => {
+        setImgValue(value)
+    }, [value])
+
+    function handleChange(value: EditorPayload) {
+        // Update the img when a value is selected from the breakout editor
+        setImgValue(value.value);
+        onChange(value);
+    }
+
     function handleBreakoutClose({ type, value } : any) {
         if (type === 'sfcc:breakoutApply') {
-            onChange(value);
+            handleChange(value);
         }
     }
 
@@ -28,7 +44,7 @@ export default function ImageInput({ name, value, onChange, hideLabel } : ImageI
     }
 
     // Reduce image quality for preview
-    const previewURL = value ? value + '&width=230' : '';
+    const previewURL = imgValue ? imgValue + '&width=230' : '';
 
     return (
         <div className="slds-form-element">
@@ -44,7 +60,7 @@ export default function ImageInput({ name, value, onChange, hideLabel } : ImageI
                 <div className={styles.actionsContainer}>
                     {previewURL && (
                         <button
-                            onClick={() => onChange('')}
+                            onClick={() => handleChange({ value: ''})}
                             className="slds-button slds-button_icon slds-button_icon-error slds-button_icon-border-filled"
                         >
                             <i className="fas fa-trash-alt slds-button__icon"></i>

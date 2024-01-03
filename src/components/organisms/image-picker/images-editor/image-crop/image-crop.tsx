@@ -23,7 +23,7 @@ export default function ImageCrop({ imagePath } : ImageCrop) {
         dispatch(setTempCropData(croppedAreaPixels));
     }
 
-    const imageURL = editorsContext.urls.viewImageURL + imagePath;
+    const imageURL = editorsContext().urls.viewImageURL + imagePath;
     return (
         <Cropper
             crop={crop}
