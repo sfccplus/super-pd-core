@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import RangeSlider from 'react-range-slider-input';
 import { useDispatch } from 'react-redux';
-import { useAppSelector } from '../manager-hooks';
+import { useAppSelector } from '../redux/store-hooks';
 
 import { setQuality } from '../redux/image-slice';
 

@@ -1,12 +1,8 @@
 declare global {
-    var emit: (event: any, handleClose: Function) => void;
-    var changeValidationState: (state: boolean) => void;
-    var publishState: (payload: any) => void;
+    var emit: (event: any, handleClose?: Function) => void;
 
-    var viewImageURL: string;
-    var imageUploaderURL: string;
-    var getFolderImagesURL: string;
-    var getLibraryFoldersURL: string;
+    var EditorsContext: any;
+    var parentIFrame: any;
 }
 
 export * from './editors';

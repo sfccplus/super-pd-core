@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { editorsContext } from 'src/helpers';
 
 // Define a service using a base URL and expected endpoints
 export const imagesManagerClient = createApi({
@@ -9,7 +10,7 @@ export const imagesManagerClient = createApi({
     tagTypes: ['Images'],
     endpoints: (builder) => ({
         getLibraryFolders: builder.query<any[], void>({
-            query: () => `${window.getLibraryFoldersURL}`,
+            query: () => `${editorsContext.urls.getLibraryFoldersURL}`,
         }),
         getFolderImages: builder.query({
             query: (folderPath) => {
@@ -17,7 +18,7 @@ export const imagesManagerClient = createApi({
                 const locale = folderComponents.shift();
                 folderPath = folderComponents.join('/');
 
-                return `${window.getFolderImagesURL}&locale=${locale}&folderPath=${folderPath}`;
+                return `${editorsContext.urls.getFolderImagesURL}&locale=${locale}&folderPath=${folderPath}`;
             },
             providesTags: ['Images'],
         }),
@@ -28,7 +29,7 @@ export const imagesManagerClient = createApi({
                 folderPath = folderComponents.join('/');
 
                 return {
-                    url: `${window.imageUploaderURL}&locale=${locale}&uploadPath=${folderPath}`,
+                    url: `${editorsContext.urls.imageUploaderURL}&locale=${locale}&uploadPath=${folderPath}`,
                     method: 'POST',
                     body: data,
                 };

@@ -13,7 +13,7 @@ interface LeftPanelProps {
 
 export default function LeftPanel({ height, currentFolder } : LeftPanelProps) {
     const uploadFormRef = useRef<HTMLFormElement>(null);
-    const [updatePost, { isLoading }] = useUploadImageMutation();
+    const [uploadImage, { isLoading }] = useUploadImageMutation();
 
     function handleFileChange() {
         const formElement = uploadFormRef.current;
@@ -21,7 +21,7 @@ export default function LeftPanel({ height, currentFolder } : LeftPanelProps) {
         if (!formElement) return;
 
         const formData = new FormData(formElement);
-        updatePost({
+        uploadImage({
             folderPath: currentFolder,
             data: formData,
         });

@@ -4,7 +4,7 @@ import { setEditorPage, toggleEditor } from '../../redux/manager-slice';
 import { resetImage, saveCropData, setTempCropData } from '../../redux/image-slice';
 
 import styles from './img-editor-header.module.scss';
-import { useAppSelector } from '../../manager-hooks';
+import { useAppSelector } from '../../redux/store-hooks';
 
 export default function ImgEditorHeader() {
     const dispatch = useDispatch();

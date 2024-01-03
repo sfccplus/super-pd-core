@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useAppSelector } from '../../manager-hooks';
-
 import Cropper, { Area } from 'react-easy-crop';
+
+import { editorsContext } from 'src/helpers';
+
+import { useAppSelector } from '../../redux/store-hooks';
 import { setTempCropData } from '../../redux/image-slice';
 
 interface ImageCrop {
@@ -21,7 +23,7 @@ export default function ImageCrop({ imagePath } : ImageCrop) {
         dispatch(setTempCropData(croppedAreaPixels));
     }
 
-    const imageURL = window.viewImageURL + imagePath;
+    const imageURL = editorsContext.urls.viewImageURL + imagePath;
     return (
         <Cropper
             crop={crop}

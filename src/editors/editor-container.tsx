@@ -13,7 +13,7 @@ export type CloseCallBackData = {
 export type EditorProps = {
     value?: EditorPayload;
     onChange: (payload: EditorPayload) => void;
-    onValidationChange: (payload: any) => void;
+    onValidationChange: (payload: boolean) => void;
     emitBreakout: (
         editorId: string,
         title: string,

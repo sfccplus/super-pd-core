@@ -1,4 +1,4 @@
-import { useAppSelector } from '../manager-hooks';
+import { useAppSelector } from '../redux/store-hooks';
 
 import ControlPanel from './control-panel';
 import ImageCrop from './image-crop/image-crop';

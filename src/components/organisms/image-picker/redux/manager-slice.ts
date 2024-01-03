@@ -17,13 +17,7 @@ export const imagesManagerSlice = createSlice({
             state.isEditorActive = !state.isEditorActive;
         },
         setEditorPage: (state, action) => {
-            const page = action.payload;
-
-            state.currentEditorPage = page;
-
-            if (window.changeValidationState) {
-                window.changeValidationState(page != 'crop');
-            }
+            state.currentEditorPage = action.payload;
         },
     },
 });

@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { useAppSelector } from '../../manager-hooks';
+import { useAppSelector } from '../../redux/store-hooks';
 
 import { toggleEditor } from '../../redux/manager-slice';
 import { setCurrentImage } from '../../redux/image-slice';

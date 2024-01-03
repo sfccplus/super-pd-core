@@ -1,6 +1,6 @@
 import useResizeObserver from 'use-resize-observer';
 
-import { useAppSelector } from './manager-hooks';
+import { useAppSelector } from './redux/store-hooks';
 import ImagesList from './images-list/images-list';
 import ImagesEditor from './images-editor/images-editor';
 import LeftPanel from './left-panel/left-panel';

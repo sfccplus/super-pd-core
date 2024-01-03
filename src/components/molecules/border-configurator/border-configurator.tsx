@@ -39,7 +39,6 @@ export default function BorderConfigurator({
         <div className={styles.editorContainer}>
             <h5>{name}</h5>
             <ColorPicker
-                pickerPosition="bottom"
                 name="Border Color"
                 value={value.color}
                 onChange={(value) => handleChange('color', value)}
