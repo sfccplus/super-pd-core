@@ -1,6 +1,11 @@
 declare module '*.module.scss';
 declare module 'react-range-slider-input';
 
+type EditorPayload = {
+    value: any;
+    [key: string]: any
+}
+
 type Directions = 'top' | 'right' | 'bottom' | 'left';
 
 interface Measurement {

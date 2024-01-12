@@ -3,8 +3,8 @@ import { generateSalt } from 'src/utilities';
 
 interface BreakPointSelectorProps {
     value: string;
-    onChange: (a: string) => void,
-    excludeBreakpoints: string[]
+    onChange: (breakpoint: string) => void,
+    excludeBreakpoints?: string[]
 }
 
 export default function BreakPointSelector({

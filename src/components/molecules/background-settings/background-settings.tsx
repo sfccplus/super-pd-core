@@ -13,7 +13,7 @@ export default function BackgroundSettings({ value, onChange } : BackgroundSetti
             <div className="slds-m-bottom_small">
                 <ImageInput
                     name="Background Image"
-                    onChange={(value) => onChange('backgroundImage', value)}
+                    onChange={(payload) => onChange('backgroundImage', payload.value)}
                     value={value('backgroundImage')}
                 />
             </div>

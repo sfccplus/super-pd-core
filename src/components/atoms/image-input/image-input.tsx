@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { EditorPayload } from 'src/editors/editor-container';
-
 import styles from './image-input.module.scss';
 
 interface ImageInputProps {

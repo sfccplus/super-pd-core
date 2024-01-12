@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 
 interface NumberInputProps {
     name: string;
-    value: number;
-    onChange: (a: number, b: boolean) => void;
+    value: number | undefined;
+    onChange: (value: number, isValid: boolean) => void;
     hideLabel?: boolean;
 }
 

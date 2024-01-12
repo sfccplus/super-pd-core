@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 
-import { EditorPayload } from 'src/editors/editor-container';
-
 import ImagePicker from './image-picker';
 import { imagesMangerStore } from './redux/store';
 import { addAppListener } from './redux/listener-middleware';
